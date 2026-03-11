@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyScratchPad • Better Scratch Notes for Dev Flow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                    },
+                    colors: {
+                        bg: '#18181b', // zinc-900
+                        fg: '#ffffff',
+                        bento: '#27272a', // zinc-800
+                        bentohover: '#3f3f46', // zinc-700
+                        accent: '#facc15', // yellow-400
+                        mint: '#67e8f9'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --glow-a: rgba(250, 204, 21, 0.12);
+            --glow-b: rgba(103, 232, 249, 0.1);
+        }
+        body {
+            color: #ffffff;
+            background:
+                radial-gradient(900px 500px at 8% -10%, var(--glow-a), transparent 60%),
+                radial-gradient(900px 560px at 95% 0%, var(--glow-b), transparent 60%),
+                #18181b;
+        }
+        .bento-card {
+            background-color: #27272a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1.5rem;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        .bento-card:hover {
+            border-color: rgba(250, 204, 21, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 36px -16px rgba(0, 0, 0, 0.7);
+        }
+        .grain::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 0.5px, transparent 0.5px);
+            background-size: 3px 3px;
+            opacity: 0.28;
+        }
+        .hero-chip {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(24, 24, 27, 0.75);
+            backdrop-filter: blur(6px);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen py-12 sm:py-16 px-4 sm:px-6 font-sans">
+
+    <!-- Header Section -->
+    <header class="container mx-auto max-w-6xl mb-12 sm:mb-16 text-center relative">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent text-bg text-sm font-bold mb-6 tracking-wide shadow-lg shadow-accent/20">
+            NOW ON VS CODE MARKETPLACE
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.05]">
+            Keep quick ideas, snippets, and
+            <br/><span class="text-accent underline decoration-4 underline-offset-8">draft files</span> in your coding flow.
+        </h1>
+        <p class="text-lg sm:text-xl text-zinc-300 max-w-3xl mx-auto mb-4 leading-relaxed font-light">
+            MyScratchPad is a lightweight extension for VS Code-based editors. It gives every temporary thought a home so you stop juggling sticky notes, random files, and lost clipboard content.
+        </p>
+        <p class="text-sm text-zinc-500 max-w-3xl mx-auto mb-8 sm:mb-10">
+            Works anywhere VS Code extensions run, including VS Code, Cursor, Windsurf, Trae, and Antigravity.
+        </p>
+        <div class="flex justify-center items-center gap-3 sm:gap-4 flex-col sm:flex-row max-w-md mx-auto sm:max-w-none">
+            <a href="https://marketplace.visualstudio.com/items?itemName=jccoder.myscratchpad" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 bg-fg text-bg hover:bg-zinc-200 font-bold rounded-2xl transition shadow-lg text-center">Install Now</a>
+            <a href="https://github.com/JC-Coder/myscratchpad-vscode-extension" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 border border-zinc-700 hover:border-accent/40 text-zinc-200 hover:text-white rounded-2xl transition text-center">See Workflow</a>
+        </div>
+        <div class="mt-6 sm:mt-8 flex flex-wrap justify-center gap-2 sm:gap-3 text-xs sm:text-sm">
+            <span class="hero-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-zinc-300">Global + Workspace Scopes</span>
+            <span class="hero-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-zinc-300">Clipboard-Aware New File</span>
+            <span class="hero-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-zinc-300">Templates for Common Extensions</span>
+        </div>
+    </header>
+
+    <!-- Bento Grid -->
+    <main class="container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-3 md:grid-rows-3 gap-4 sm:gap-6 auto-rows-auto md:auto-rows-[260px]">
+        
+        <!-- Large Card - Project Context -->
+        <div class="bento-card md:col-span-2 md:row-span-2 p-6 sm:p-10 flex flex-col grain">
+            <div class="relative z-10 flex flex-col h-full">
+                <div class="inline-flex items-center gap-2 text-xs font-bold text-accent uppercase tracking-[0.18em] mb-5">
+                    Why This Project Exists
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-white max-w-xl">Developers create dozens of temporary files daily. Most get lost.</h2>
+                <p class="text-zinc-300 text-base sm:text-lg mb-6 sm:mb-8 max-w-2xl leading-relaxed">
+                    MyScratchPad keeps throwaway work intentional: quick notes, debug logs, query drafts, and snippets are all easy to create and easy to clean up inside your editor.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2 sm:mt-auto">
+                    <div class="bg-bg p-4 rounded-xl border border-zinc-700">
+                        <p class="text-xs uppercase tracking-wider text-zinc-500 mb-2">Step 1</p>
+                        <p class="text-sm font-semibold text-zinc-100">Open command palette</p>
+                        <p class="text-xs text-zinc-400 mt-1">`MyScratchPad: New`</p>
+                    </div>
+                    <div class="bg-bg p-4 rounded-xl border border-zinc-700">
+                        <p class="text-xs uppercase tracking-wider text-zinc-500 mb-2">Step 2</p>
+                        <p class="text-sm font-semibold text-zinc-100">Pick file extension</p>
+                        <p class="text-xs text-zinc-400 mt-1">`.md`, `.ts`, `.json`, `.sh`</p>
+                    </div>
+                    <div class="bg-bg p-4 rounded-xl border border-zinc-700">
+                        <p class="text-xs uppercase tracking-wider text-zinc-500 mb-2">Step 3</p>
+                        <p class="text-sm font-semibold text-zinc-100">Write and move on</p>
+                        <p class="text-xs text-zinc-400 mt-1">No context switch required</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Square Card 1 - Scope Context -->
+        <div class="bento-card p-6 sm:p-8 flex flex-col justify-between">
+            <div>
+                <div class="w-12 h-12 rounded-full bg-accent/20 text-accent flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Global + Workspace Mode</h3>
+                <p class="text-zinc-400 text-sm">Use global scratch files for reusable snippets, or workspace files for project-specific drafts and notes.</p>
+            </div>
+        </div>
+        
+        <!-- Square Card 2 - Clipboard -->
+        <div class="bento-card p-6 sm:p-8 flex flex-col justify-between bg-gradient-to-br from-zinc-800 to-zinc-900">
+            <div>
+                <div class="w-12 h-12 rounded-full bg-mint/20 text-mint flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Clipboard-First Start</h3>
+                <p class="text-zinc-400 text-sm">Turn copied stack traces, API payloads, or SQL snippets into structured scratch files in one action.</p>
+            </div>
+        </div>
+
+        <!-- Horizontal Card - Practical Context -->
+        <div class="bento-card md:col-span-2 p-6 sm:p-8 flex items-center justify-between gap-6 flex-wrap sm:flex-nowrap">
+            <div class="max-w-lg">
+                <h3 class="text-2xl font-bold mb-4">Built for Real Developer Micro-Tasks</h3>
+                <p class="text-zinc-300 leading-relaxed">Draft a migration plan, test a regex, stash a shell one-liner, or capture a debugging note. MyScratchPad supports common extensions with light templates so your first line is useful, not blank.</p>
+            </div>
+            <div class="grid grid-cols-2 gap-2 opacity-80 font-mono text-sm text-center min-w-[180px]">
+                <div class="px-4 py-2 bg-zinc-900 rounded-lg">.tsx</div>
+                <div class="px-4 py-2 bg-zinc-900 rounded-lg">.json</div>
+                <div class="px-4 py-2 bg-zinc-900 rounded-lg">.py</div>
+                <div class="px-4 py-2 bg-zinc-900 rounded-lg text-accent">.md</div>
+            </div>
+        </div>
+
+        <!-- Small Card - CTA -->
+        <div class="bento-card p-6 sm:p-8 group overflow-hidden">
+            <div class="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
+            <div class="relative z-10 h-full flex flex-col justify-center text-center">
+                <h3 class="text-xl font-bold mb-2 group-hover:text-bg transition-colors">Open Source. Free. Practical.</h3>
+                <a href="https://marketplace.visualstudio.com/items?itemName=jccoder.myscratchpad" target="_blank" rel="noopener noreferrer" class="text-zinc-400 text-sm group-hover:text-bg/80 transition-colors underline decoration-2 underline-offset-4">Install and keep your flow &rarr;</a>
+            </div>
+        </div>
+
+    </main>
+    
+    <section class="container mx-auto max-w-6xl mt-8 mb-2">
+        <div class="bento-card p-8 sm:p-10 text-center">
+            <p class="text-zinc-300 text-lg leading-relaxed max-w-3xl mx-auto">
+                MyScratchPad is designed for makers who move fast. It adds structure to your temporary work without adding process, so you can think clearly and ship faster.
+            </p>
+        </div>
+    </section>
+
+    <footer class="container mx-auto max-w-6xl mt-14 text-center text-zinc-600 font-medium text-sm">
+        MyScratchPad Extension &copy; 2026 • Built for VS Code-based editors
+    </footer>
+
+</body>
+</html>
